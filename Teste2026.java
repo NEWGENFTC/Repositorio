@@ -23,7 +23,7 @@ public class Teste2026 extends OpMode {
         motorTD = hardwareMap.get(DcMotor.class, "motorTD");
 
         motorTE.setDirection(DcMotorSimple.Direction.REVERSE);
-        motorTD.setDirection(DcMotorSimple.Direction.FORWARD);
+        motorTD.setDirection(DcMotorSimple.Direction.REVERSE);
         motorFD.setDirection(DcMotorSimple.Direction.REVERSE);
         motorFE.setDirection(DcMotorSimple.Direction.FORWARD);
     }

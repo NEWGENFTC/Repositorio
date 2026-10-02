@@ -2,22 +2,27 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 @TeleOp(name = "MainMecanum", group = "Linear TesteOp")
 public class MainMecanum extends OpMode {
 
     ControlaMotores controla = new ControlaMotores();
+
     double forward, strafe, rotate;
 
     @Override
-    public void init(){
+    public void init() {
         controla.init(hardwareMap);
+        controla.IMU(hardwareMap);
         telemetry.addData("Status", "inicializado. Esperando comando");
         telemetry.update();
     }
 
     @Override
-    public void loop(){
+    public void loop() {
 
         //rotate
         forward = -gamepad1.left_stick_y;
@@ -26,13 +31,17 @@ public class MainMecanum extends OpMode {
         //strafe
         rotate = gamepad1.right_stick_x;
 
-      /*  if (gamepad1.options) { // Botão Start/Options do comando
-            tracao.getImu().resetYaw();
-        }*/
+        if (gamepad1.options) { // Botão Start/Options do comando
+            controla.getImu().resetYaw();
+        }
 
-        controla.orientadoAoRobo(forward, strafe, rotate);
+            controla.orientadoAoRobo(forward, strafe, rotate);
 
-        //telemetry.addData("Angulação", tracao.getImu().getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES));
-        telemetry.addData("Tudo dando certo! Programação orientada a robo ligada.", 0);
+            //telemetry.addData("Angulação", tracao.getImu().getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES));
+            telemetry.addData("Tudo dando certo! Programação orientada a robo ligada.", 0);
+            telemetry.addData("Indo para frente", forward);
+            telemetry.addData("Indo para o lado", strafe);
+            telemetry.addData("Rotacionando", rotate);
+        }
     }
-}
+

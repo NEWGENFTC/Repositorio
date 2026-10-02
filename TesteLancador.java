@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name = "TesteLançador", group = "Linear TesteOp")
-public class TesteLançador extends LinearOpMode {
+public class TesteLancador extends LinearOpMode {
 
     // Declaração dos dois motores do lançador e do servo
     private DcMotorEx shooterEsquerdo = null;
@@ -55,7 +55,7 @@ public class TesteLançador extends LinearOpMode {
             // ================================================================
             // CONTROLE DOS DOIS DC MOTORS (LANÇADOR DUPLO)
             // ================================================================
-            if (gamepad1.a) {
+            if (gamepad1.aWasPressed()) {
                 // Ativa ambos os motores com 85% de potência
                 shooterEsquerdo.setPower(0.85);
                 shooterDireito.setPower(0.85);
