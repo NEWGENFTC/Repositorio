@@ -2,6 +2,9 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class BackupControlaMotores {
 
@@ -10,6 +13,8 @@ public class BackupControlaMotores {
 
     private DcMotor[] motores;
     //private IMU imu;
+
+    private IMU imu;
 
     public void init(HardwareMap hwMap){
 
@@ -29,6 +34,7 @@ public class BackupControlaMotores {
         motorFD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorTD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+
         motores = new DcMotor[] {
                 motorFE,
                 motorTE,
@@ -36,14 +42,15 @@ public class BackupControlaMotores {
                 motorTD
         };
 
-       /* imu = hwMap.get(IMU.class, "imu");
+        imu = hwMap.get(IMU.class, "imu");
 
         //Inicialização e direções do IMU
         RevHubOrientationOnRobot RevOrientation = new RevHubOrientationOnRobot(
-          RevHubOrientationOnRobot.LogoFacingDirection.UP,
-          RevHubOrientationOnRobot.UsbFacingDirection.LEFT);
+                RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                RevHubOrientationOnRobot.UsbFacingDirection.LEFT);
 
-          imu.initialize(new IMU.Parameters(RevOrientation));*/
+        imu.initialize(new IMU.Parameters(RevOrientation));
+
     }
 
     // 1. CALCULAR AS POTÊNCIAS
@@ -129,7 +136,7 @@ public class BackupControlaMotores {
                 velocidadeMax
         );
     }
-    /*
+
     //Equação para o uso da potência de cada motor para mover o robô para uma direção específica (acertamento dos vetores)
     public void drive(double forward, double strafe, double rotate){
         double potenciaFE = forward + strafe + rotate;
@@ -166,8 +173,8 @@ public class BackupControlaMotores {
          double frente = raio * Math.sin(teta);
          double lado = raio * Math.cos(teta);
 
-         /*double frente = strafe * Math.sin(-anguloRad) + forward * Math.cos(-anguloRad);
-         double lado = strafe * Math.cos(-anguloRad) - forward * Math.sin(-anguloRad);
+         frente = strafe * Math.sin(-anguloRad) + forward * Math.cos(-anguloRad);
+         lado = strafe * Math.cos(-anguloRad) - forward * Math.sin(-anguloRad);
 
          this.drive(frente, lado, rotate);
     }
@@ -178,5 +185,5 @@ public class BackupControlaMotores {
 
     public void setImu(IMU imu) {
         this.imu = imu;
-    }*/
+    }
 }

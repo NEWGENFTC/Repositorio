@@ -16,18 +16,39 @@ public class autonomoTeste extends OpMode {
     DcMotor motorTE = null;
     DcMotor motorTD = null;
 
-    //Variável que determina o tempo que o comando rodará
-    public long s;
+    double ticks = 728;
+    double novaPosicao;
 
-    public void Frente(long s){
+    public void encoder(double cm){
+        motorFE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFD.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorTD.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorTE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        novaPosicao = Math.round((ticks / 30.15) * cm);
+
+        motorTE.setTargetPosition((int)novaPosicao);
+        motorFD.setTargetPosition((int)novaPosicao);
+        motorFE.setTargetPosition((int)novaPosicao);
+        motorTD.setTargetPosition((int)novaPosicao);
+
+        motorTE.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFD.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFE.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorTD.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+    }
+
+    public void Frente(long s) {
         try {
             motorFE.setPower(0.8);
             motorFD.setPower(0.8);
             motorTD.setPower(0.8);
             motorTE.setPower(0.8);
             sleep(s);
+
         }catch (InterruptedException e){
-            e.printStackTrace();
+        e.printStackTrace();
         }
     }
     public void Tras(long s){
@@ -162,26 +183,37 @@ public class autonomoTeste extends OpMode {
         motorFD = hardwareMap.get(DcMotor.class, "motorFD");
         motorTD = hardwareMap.get(DcMotor.class, "motorTD");
 
-        motorFE.setDirection(DcMotor.Direction.FORWARD);
         motorTE.setDirection(DcMotor.Direction.REVERSE);
         motorFD.setDirection(DcMotor.Direction.REVERSE);
+        motorFE.setDirection(DcMotor.Direction.REVERSE);
         motorTD.setDirection(DcMotor.Direction.REVERSE);
+
+        motorFE.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorFD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorTD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorTE.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        //counts per rev = 28 -> 28 * 36 = 728
+        //Fórmula da distância CM por ticks ->  728 / 30,15 -> Cada cm vale
+
+
+
 
     }
     public void loop() {
 
-        motorfe(3000);
+       /* motorfe(3000);
         Parar(1000);
         motorfd(3000);
         Parar(1000);
         motortd(3000);
         Parar(1000);
         motorte(3000);
-        Parar(10000);
+        Parar(10000);*/
 
-      /*Frente(1600);
-        Parar(200);
-        Virar_90_D(450);
+        Frente(1500);
+        Parar(1000);
+        /*Virar_90_D(450);
         Frente(1000);
         Parar(200);
         Virar_90_E(430);
@@ -190,7 +222,7 @@ public class autonomoTeste extends OpMode {
         Parar(250);
         Virar_90_E(430);
         Frente(2500);
-        Parar(10000);
-*/
+        Parar(10000);*/
+
     }
 }

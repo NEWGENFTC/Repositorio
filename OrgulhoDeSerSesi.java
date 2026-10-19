@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -8,6 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Servos.ServoTeste;
 
+@Disabled
 @TeleOp(name = "OrgulhoDeSerGay", group = "Linear TesteOp")
 public class OrgulhoDeSerSesi extends LinearOpMode {
     // Objeto que conta tempo
